@@ -279,6 +279,7 @@ public class Script {
                                     c++;
                                     check = reader.readLine();
                                 } while (check != null);
+                                //c = stopline
 
                                 if (scanner.hasNext()) {
                                     while (scanner.hasNext()) {
@@ -290,10 +291,7 @@ public class Script {
                                                         String tempVar;
                                                         if (scanner.hasNext()) {
                                                             tempVar = scanner.next();
-                                                            if (tempVar != null && (tempVar.contains(Comment.BULK_CLOSE.getSignature()))) {
-                                                                if (!tempVar.endsWith(Comment.BULK_CLOSE.getSignature())) {
-                                                                    returnValue.add(tempVar.replaceAll(".*!##", ""));
-                                                                }
+                                                            if (tempVar != null && (tempVar.equals(Comment.BULK_CLOSE.getSignature()))) {
                                                                 break;
                                                             }
                                                         } else {
@@ -456,10 +454,7 @@ public class Script {
                                 String tempVar;
                                 if (scanner.hasNext()) {
                                     tempVar = scanner.next();
-                                    if (tempVar != null && (tempVar.contains(Comment.BULK_CLOSE.getSignature()))) {
-                                        if (!tempVar.endsWith(Comment.BULK_CLOSE.getSignature())) {
-                                            returnValue.add(tempVar.replaceAll(".*!##", ""));
-                                        }
+                                    if (tempVar != null && (tempVar.equals(Comment.BULK_CLOSE.getSignature()))) {
                                         break;
                                     }
                                 } else {
