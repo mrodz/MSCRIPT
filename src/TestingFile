@@ -1,0 +1,56 @@
+```mscript
+
+########################################
+#                  TIC-TAC-TOE TESTS                      #
+########################################
+
+# in this document, I return every possible winning
+# move combination in Tic-Tac-Toe.
+
+@start
+
+##!
+# Horizontal Wins
+X_X______
+_XX______
+XX_______
+
+___X_X___
+____XX___
+___XX____
+
+______X_X
+______XX_
+_______XX
+
+
+# Vertical Wins
+X_____X__
+X__X_____
+___X__X__
+
+_X_____X_
+_X__X____
+____X__X_
+
+__X_____X
+__X__X___
+_____X__X
+
+# Diagonal Wins
+X_______X
+X___X____
+____X___X
+
+__X___X__
+__X_X____
+____X_X__
+
+
+# Random Grids
+X___X____
+_X__O__X_
+OOOOO_OOO # impossible state
+!##
+
+@stop
