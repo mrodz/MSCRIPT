@@ -66,13 +66,13 @@ Root Commands represent a specific action for the compiler. As of release 1.0, t
 Annotations are used to call certain functions that modify an entry. The list of Annotations consists of:
 | Annotation | Function                                                                                                         |
 |------------|------------------------------------------------------------------------------------------------------------------|
-| *[@]       | Allows an entry to start with the '@' character (Instead of declaring a Root Command)                            |
-| *[*]       | Allows an entry to start with the '*' character (Instead of declaring an annotation)                             |
-| *[#]       | Allows an entry to start with the '#' character (Instead of introducing a comment)                               |
-| *[_]       | Stores a blank entry                                                                                             |
-| *[^+]      | Stores the current line's data as a single entry (Doubled String)                                                |
-| *[{{]      | Opens a data group entry that will store every entry read until it is closed.<br>(Not really practical just yet) |
-| *[}}]      | Closes a data group entry                                                                                        |
+| \*[@]       | Allows an entry to start with the '@' character (Instead of declaring a Root Command)                            |
+| \*[\*]       | Allows an entry to start with the '*' character (Instead of declaring an annotation)                             |
+| \*[#]       | Allows an entry to start with the '#' character (Instead of introducing a comment)                               |
+| \*[_]       | Stores a blank entry                                                                                             |
+| \*[^+]      | Stores the current line's data as a single entry (Doubled String)                                                |
+| \*[{{]      | Opens a data group entry that will store every entry read until it is closed.<br>(Not really practical just yet) |
+| \*[}}]      | Closes a data group entry                                                                                        |
 
 ## Example Script:
 See the `ExampleScript.txt` file to see how a completed MSCRIPT file would look like. 
