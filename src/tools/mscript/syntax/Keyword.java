@@ -6,9 +6,11 @@ import tools.mscript.ScriptingException;
  * <b>This interface is used to perform operations on the different keywords in MSCRIPT</b>
  */
 public interface Keyword {
-    /**<b>Checks for the existence of a keyword.</b>
-     * @param name Takes the full name of the keyword, including any symbols. (`@start` is a full keyword.)
-     * @return {@code boolean} of whether or not this value exists.
+    /**
+     * <b>Checks for the existence of a {@link RootCommand Root Command}.</b>
+     * @param name Takes the full name of the {@link RootCommand command}, <u>including</u> the symbol associated
+     *             with {@link TextSpecifications#COMMAND}. (`@start` is a full command)
+     * @return {@code boolean} value of whether or not this value exists.
      * @implNote can be useful for throwing exceptions.
      */
     static boolean commandExists(String name) {
@@ -17,6 +19,14 @@ public interface Keyword {
         }
         return false;
     }
+
+    /**
+     * <b>Checks for the existence of an {@link Annotation}.</b>
+     * @param name Takes the full name of the {@link Annotation annotation} <u>excluding</u> the value associated
+     *             with {@link TextSpecifications#ANNOTATION}. (`[@]` is a proper query.)
+     * @return {@code boolean} value of whether or not this value exists.
+     * @implNote can be useful for throwing exceptions.
+     */
     static boolean annotationExists(String name) {
         for (Annotation a : Annotation.values()) {
             if (a.getID().equals(name)) return true;

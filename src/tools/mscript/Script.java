@@ -282,13 +282,45 @@ public class Script {
 
                                 if (scanner.hasNext()) {
                                     while (scanner.hasNext()) {
-                                        input = scanner.nextLine();
-                                        if ((input.length() > 0 && input.replaceAll("\\s++", "").charAt(0) != TextSpecifications.COMMENT.getSymbol()) && !input.matches("\\s++")) {
-                                            new ScriptingException(String
-                                                    .format("Dangling code on line %d (Found: '%s')", c, input),
-                                                    "Remove dangling code",
-                                                    2
-                                            ).printError();
+                                        input = scanner.next();
+                                        if ((input.length() > 0 && input.replaceAll("\\s++", "").charAt(0) == TextSpecifications.COMMENT.getSymbol()) && !input.matches("\\s++")) {
+                                            if (input.startsWith(Comment.BULK_OPEN.getSignature())) { //multi-line comment
+                                                if (!input.equals(Comment.BULK_OPEN.getSignature() + Comment.BULK_CLOSE.getSignature()))
+                                                    while (true) {
+                                                        String tempVar;
+                                                        if (scanner.hasNext()) {
+                                                            tempVar = scanner.next();
+                                                            if (tempVar != null && (tempVar.contains(Comment.BULK_CLOSE.getSignature()))) {
+                                                                if (!tempVar.endsWith(Comment.BULK_CLOSE.getSignature())) {
+                                                                    returnValue.add(tempVar.replaceAll(".*!##", ""));
+                                                                }
+                                                                break;
+                                                            }
+                                                        } else {
+                                                            break;
+                                                        }
+                                                    }
+                                            } else if (input.startsWith(Comment.BULK_CLOSE.getSignature())) {
+                                                new ScriptingException("Dangling bulk comment",
+                                                        "Look over written bulk comment declarations",
+                                                        1
+                                                ).printError();
+                                            } else if (input.replaceAll("\\s++", "").startsWith(Comment
+                                                    .SINGLE.getSignature())) {
+                                                scanner.nextLine();
+                                            } else {
+                                                new ThrownScriptingException(
+                                                        String.format("Dangling code on line %d (Found: '%s')", c, input),
+                                                        "Remove dangling code",
+                                                        2
+                                                );
+                                            }
+                                        } else {
+                                            new ThrownScriptingException(
+                                                String.format("Dangling code on line %d (Found: '%s')", c, input),
+                                                "Remove dangling code",
+                                                2
+                                            );
                                         }
                                     }
                                 }
@@ -426,7 +458,7 @@ public class Script {
                                     tempVar = scanner.next();
                                     if (tempVar != null && (tempVar.contains(Comment.BULK_CLOSE.getSignature()))) {
                                         if (!tempVar.endsWith(Comment.BULK_CLOSE.getSignature())) {
-
+                                            returnValue.add(tempVar.replaceAll(".*!##", ""));
                                         }
                                         break;
                                     }

@@ -4,6 +4,7 @@ import tools.mscript.ScriptingException;
 import java.util.Objects;
 
 /**
+ * <b>Non-functional class - Don't use</b>
  * @deprecated - not used, but might be built upon in the future
  */
 @Deprecated

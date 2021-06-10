@@ -2,7 +2,11 @@ package tools.mscript.syntax;
 
 /**
  * <b>Miscellaneous symbols used throughout the program.</b><br/>
- * See also: {@link tools.mscript.Script}, {@link tools.mscript.ScriptingException}
+ * This {@code enum} provides quick access to special characters that
+ * make scripting elements unique.
+ * <p>
+ *     Implementations: {@link tools.mscript.Script Script}, {@link tools.mscript.ScriptingException ScriptingException}
+ * </p>
  */
 @SuppressWarnings("unused")
 public enum Symbols {
@@ -24,7 +28,9 @@ public enum Symbols {
     MIDDLE_BAR_WITH_PIPE('├'),
     CROSSED_BARS('┼');
 
+    /** The UNICODE character associated with each class entry */
     char symbol;
+
     Symbols(char symbol) {
         this.symbol = symbol;
     }

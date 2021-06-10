@@ -62,7 +62,7 @@ public class ScriptingException {
      * @implNote This is the main function to call from {@link ScriptingException}, make sure
      * that if you build one that this is thrown!
      */
-    public void printError() {
+    public final void printError() {
         System.out.printf("%nException: %s%n", this.message);
         if (java.util.Objects.nonNull(possibleFix)) {
             System.out.printf("%s Possible Fix: %s%n", getSpaces(1), possibleFix);
@@ -77,7 +77,7 @@ public class ScriptingException {
      * <b>Get the error message associated with this instance of {@link ScriptingException}</b>
      * @return a formatted {@link String} with the cause of the exception.
      */
-    public String getMessage() {
+    public final String getMessage() {
         return message;
     }
 
@@ -85,7 +85,7 @@ public class ScriptingException {
      * <b>Get a message containing the possible fixes associated with this instance of {@link ScriptingException}</b>
      * @return a formatted {@link String} with possible fixes for the exception.
      */
-    public String getPossibleFix() {
+    public final String getPossibleFix() {
         return possibleFix;
     }
 
@@ -93,7 +93,7 @@ public class ScriptingException {
      * <b>Get the severity level of this instance of {@link ScriptingException}</b>
      * @return an {@code int} out of a possible value of 5.
      */
-    public int getSeverity() {
+    public final int getSeverity() {
         return severity;
     }
 
