@@ -6,7 +6,7 @@ It follows a couple of simple rules, and is relatively easy to learn.
 
 ## Documentation:
 ### Basics
-To declare a text file as an MSCRIPT, the first line must be set as: _```mscript_  
+To declare a text file as an MSCRIPT, the first line must be set as: ` ```mscript `  
   
 For the file to be parsed, it is required for it to contain the `@start` parameter. Below this line, all text is saved as an **entry**.  
   
