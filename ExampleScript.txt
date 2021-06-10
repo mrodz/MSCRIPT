@@ -1,4 +1,5 @@
 ```mscript
+
 ##!
 This is a valid example of an MSCRIPT compatible script!
 This text right here is present inside of a block comment.
@@ -8,6 +9,7 @@ This text right here is present inside of a block comment.
 
 @start
 # the above parameter opens the scanner. Remember: no dangling code! 
+
 # From now on, every piece of text data is saved as an entry.
 
 text1
