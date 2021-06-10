@@ -1,0 +1,47 @@
+```mscript
+##!
+This is a valid example of an MSCRIPT compatible script!
+This text right here is present inside of a block comment.
+!##
+
+# This is a single-line comment
+
+@start
+# the above parameter opens the scanner. Remember: no dangling code! 
+# From now on, every piece of text data is saved as an entry.
+
+text1
+entry2
+fun3
+
+a b c
+*[^+]d e f
+
+*[_]
+
+*[@]fakeStart
+*[*]isAnAsterisk
+*[#]#!_is_a_fake_comment
+
+# Grouped data entry:
+*[{{]a b c
+d
+e f 
+g h i
+j k l m 
+*[}}]
+# The entries above are saved as: {a, b, c, d, e, f, g, h, i, j, k, l, m}
+
+woo!
+
+
+@stop # this line stops the saving of entries
+
+##!
+This is the end of the file! 
+Make sure that there is no text above or below the entries, 
+or else the compiler will throw an exception.
+
+This MSCRIPT was made by mrod
+:)
+!##
