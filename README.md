@@ -64,10 +64,10 @@ Root Commands represent a specific action for the compiler. As of release 1.0, t
   
 ### Annotations
 Annotations are used to call certain functions that modify an entry. The list of Annotations consists of:
-| Annotation | Function                                                                                                         |
-|------------|------------------------------------------------------------------------------------------------------------------|
+| Annotation | Function                                                                                                          |
+|------------|-------------------------------------------------------------------------------------------------------------------|
 | \*[@]       | Allows an entry to start with the '@' character (Instead of declaring a Root Command)                            |
-| \*[\*]       | Allows an entry to start with the '*' character (Instead of declaring an annotation)                             |
+| \*[\*]       | Allows an entry to start with the '*' character (Instead of declaring an annotation)                            |
 | \*[#]       | Allows an entry to start with the '#' character (Instead of introducing a comment)                               |
 | \*[_]       | Stores a blank entry                                                                                             |
 | \*[^+]      | Stores the current line's data as a single entry (Doubled String)                                                |
@@ -76,3 +76,19 @@ Annotations are used to call certain functions that modify an entry. The list of
 
 ## Example Script:
 See the `ExampleScript.txt` file to see how a completed MSCRIPT file would look like. 
+
+## Implementation:
+Once all the files are built in to your project, you can initialize your script by using one of four constructors:
+<ol>
+    <li>` Script var = new Script(java.io.File file) `</li>
+    <li>` Script var = new Script(String filePath) `</li>
+    <li>` Script var = new Script(java.io.File file, boolean logSuccessfulOutputs) `</li>
+    <li>` Script var = new Script(String filePath, boolean logSuccessfulOutputs) `</li>
+</ol>
+  
+_where..._  
+<ul> 
+    <li> ` file ` is an ` Object ` of the ` File ` class </li>
+    <li> ` filePath ` is a ` String ` containing the full path to the file. (Example: "C:\\users\\boo\\Documents\\MyFile.txt") </li>
+    <li> ` logSuccessfulOutputs ` is a ` boolean ` value that determines whether you'd like to log completion times as comments on the file </li>
+</ul>
