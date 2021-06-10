@@ -15,8 +15,8 @@ There are four types of entries:
 |--------|----------------------------------------------------------------------------------|
 |   @    | The '@' symbol declares a **Root Command**                                       |
 |   *    | The '*' symbol declares an **Annotation**                                        |
-|   #    | The '#' symbol introduces a comment.                                             |
-| {none} | If an entry does not start with any of the above three, it is saved as a String. |
+|   #    | The '#' symbol introduces a **Comment**                                          |
+| {none} | If an entry does not start with any of the above three, it is saved as a `String ` |
   
 Dangling text is not allowed! Any non-commented text above or below the reading parameters will throw an exception.
 
@@ -37,10 +37,10 @@ Exceptions can be thrown for various reasons, but they all follow the format of:
 </ul>
   
 An exception's "Reason:" tag describes the error thrown; it's "Possible fixes:" tag might help point the user in the right direction to solving their problem.  
+  
 Every exception has a "Severity Level:" tag, which returns a value out of five following the rule:
   
 <ol>
-    The `Severity Level` entry refers to a value out of five:
     <li>Minor error, and can easily be fixed.</li>
     <li>Slight syntax error, can be fixed</li>
     <li>More complex syntax error</li>
@@ -75,20 +75,24 @@ Annotations are used to call certain functions that modify an entry. The list of
 | \*[}}]      | Closes a data group entry                                                                                        |
 
 ## Example Script:
-See the `ExampleScript.txt` file to see how a completed MSCRIPT file would look like. 
+See the `ExampleScript.txt` file to see what a valid MSCRIPT file can look like. 
 
-## Implementation:
-Once all the files are built in to your project, you can initialize your script by using one of four constructors:
+# Implementation:
+Once all the files are built in to your project, you can initialize your script by choosing from one of these four constructors:
 <ol>
-    <li>` Script var = new Script(java.io.File file) `</li>
-    <li>` Script var = new Script(String filePath) `</li>
-    <li>` Script var = new Script(java.io.File file, boolean logSuccessfulOutputs) `</li>
-    <li>` Script var = new Script(String filePath, boolean logSuccessfulOutputs) `</li>
+    <li>Script var = new Script(java.io.File file)</li>
+    <li>Script var = new Script(String filePath)</li>
+    <li>Script var = new Script(java.io.File file, boolean logSuccessfulOutputs)</li>
+    <li>Script var = new Script(String filePath, boolean logSuccessfulOutputs)</li>
 </ol>
   
 _where..._  
 <ul> 
-    <li> ` file ` is an ` Object ` of the ` File ` class </li>
-    <li> ` filePath ` is a ` String ` containing the full path to the file. (Example: "C:\\users\\boo\\Documents\\MyFile.txt") </li>
-    <li> ` logSuccessfulOutputs ` is a ` boolean ` value that determines whether you'd like to log completion times as comments on the file </li>
+    <li> <u>file</u> is an Object of the File class </li>
+    <li> <u>filePath</u> is a String containing the full path to the file. (Example: "C:\\users\\boo\\Documents\\MyFile.txt") </li>
+    <li> <u>logSuccessfulOutputs</u> is a boolean value that determines whether you'd like to log completion times as comments on the file </li>
 </ul>
+  
+Once initialized, you can compile your file by using the ` read() ` method. This returns a ` String[] ` array that can be used throughout your project.  
+  
+Thank you for checking out this language! Please report any bugs or give feedback as to how I can make this better. :)
