@@ -96,3 +96,4 @@ _where..._
 Once initialized, you can compile your file by using the ` read() ` method. This returns a ` String[] ` array that can be used throughout your project.  
   
 Thank you for checking out this language! Please report any bugs or give feedback as to how I can make this better. :)
+````

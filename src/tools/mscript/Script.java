@@ -6,10 +6,10 @@ import tools.mscript.syntax.Annotation;
 import tools.mscript.syntax.RootCommand;
 import tools.mscript.syntax.TextSpecifications;
 import tools.mscript.syntax.Symbols;
-import java.io.BufferedReader;
+import java.io.File;
 import java.io.FileReader;
 import java.io.FileWriter;
-import java.io.File;
+import java.io.BufferedReader;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
@@ -116,7 +116,7 @@ import java.util.Scanner;
  *         The `Severity Level` entry refers to a value out of five:
  *         <li>Minor error, and can easily be fixed.</li>
  *         <li>Slight syntax error, can be fixed</li>
- *         <li>More complex syntax errror</li>
+ *         <li>More complex syntax error</li>
  *         <li>The script encounters a user error while parsing the text</li>
  *         <li>The script cannot compile or run the file</li>
  *     </ol>
@@ -156,13 +156,31 @@ import java.util.Scanner;
  */
 @SuppressWarnings({"SpellCheckingInspection", "unused"})
 public class Script {
-    private final File file;
+    /**Value that is stored once the `@start` parameter is found.*/
     private int startLine = 0;
-    private final boolean initialized;
+
+    /**
+     * Value that determines whether the program should log completion times.
+     * @see #Script(File, boolean)
+     * @see #Script(String, boolean)
+     */
     private boolean log = false;
+
+    /**Updated on initialization*/
+    private final boolean initialized;
+
+    /**The {@link java.io.File File} variable assigned on initialization, and scanned during compilation.*/
+    private final File file;
+
+    /**This {@link ArrayList} is used to manage input from the {@link #file}*/
     private final ArrayList<String> returnValue = new ArrayList<>();
 
+    /**
+     * <b>Default constructor to initialize the {@link Script Scripting Engine}</b>
+     * @param file An object of the {@link java.io.File File} class.
+     */
     public Script(File file) {
+        //Pre-Compilation errors
         if (!file.getPath().endsWith(".txt")) new ScriptingException(String.format("Wrong file type. " +
                 "Required: '.txt', found '%s'", file.getName().contains(".")
                 ? file.getName().substring(file.getName().lastIndexOf('.'))
@@ -178,11 +196,12 @@ public class Script {
         if (!file.canRead()) new ThrownScriptingException("This file is private and cannot be read by this compiler",
                 "Change the access permissions linked to " + file.getName(), 5);
 
+        //Updating fields
         this.file = file;
         this.initialized = true;
 
+        //Is MSCRIPT file?
         try (Scanner scanner = new Scanner(this.file)) {
-            //noinspection SpellCheckingInspection
             if (!scanner.hasNext() || !scanner.nextLine().equals("```mscript"))
                 new ScriptingException("This file is not compatible " +
                         "with the TestFile Scanner!",
@@ -194,10 +213,23 @@ public class Script {
         }
     }
 
+    /**
+     * <b>Default constructor to initialize the {@link Script Scripting Engine}</b>
+     * @param filePath a {@link String} containing the full path to the file.
+     */
     public Script(String filePath) {
         this(new File(filePath));
     }
 
+    /**
+     * <b>Constructor to initialize the {@link Script Scripting Engine}</b>
+     * <p>
+     *     Allows for the logging of completion times onto the document as a {@link Comment}
+     *     on the last line of the document.
+     * </p>
+     * @param file An object of the {@link java.io.File File} class.
+     * @param logSuccessfulOutputs a {@code boolean} value determining whether the completion time should be logged.
+     */
     public Script(File file, boolean logSuccessfulOutputs) {
         this(file);
         if (logSuccessfulOutputs && !file.canWrite()) new ThrownScriptingException("This file cannot be edited",
@@ -205,6 +237,15 @@ public class Script {
         log = logSuccessfulOutputs;
     }
 
+    /**
+     * <b>Constructor to initialize the {@link Script Scripting Engine}</b>
+     * <p>
+     *     Allows for the logging of completion times onto the document as a {@link Comment}
+     *     on the last line of the document.
+     * </p>
+     * @param filePath a {@link String} containing the full path to the file.
+     * @param logSuccessfulOutputs a {@code boolean} value determining whether the completion time should be logged.
+     */
     public Script(String filePath, boolean logSuccessfulOutputs) {
         this(new File(filePath), logSuccessfulOutputs);
     }
@@ -234,9 +275,9 @@ public class Script {
                 String input;
                 for (int i = startLine; scanner.hasNext(); i++) {
                     input = scanner.next();
-                    if (input.isEmpty()) { //Blank? edit: I don't this this is ever activated.
+                    if (input.isEmpty()) { //Empty input
                         scanner.nextLine();
-                    } else if (input.startsWith(Character.toString(TextSpecifications.COMMENT.getSymbol()))) { //Comment?
+                    } else if (input.startsWith(Character.toString(TextSpecifications.COMMENT.getSymbol()))) { //Comment
                         if (input.startsWith(Comment.BULK_OPEN.getSignature())) { //multi-line comment
                             if (!input.equals(Comment.BULK_OPEN.getSignature() + Comment.BULK_CLOSE.getSignature()))
                                 while (true) {
@@ -253,7 +294,7 @@ public class Script {
                                         break;
                                     }
                                 }
-                        } else if (input.startsWith(Comment.BULK_CLOSE.getSignature())) {
+                        } else if (input.startsWith(Comment.BULK_CLOSE.getSignature())) { //handled earlier on
                             new ScriptingException("Dangling bulk comment",
                                     "Look over written bulk comment declarations",
                                     1
@@ -261,7 +302,7 @@ public class Script {
                         } else if (input.startsWith(Comment.SINGLE.getSignature())) {
                             scanner.nextLine();
                         }
-                    } else if (input.startsWith(Character.toString(TextSpecifications.COMMAND.getSymbol()))) {//Root Command?
+                    } else if (input.startsWith(Character.toString(TextSpecifications.COMMAND.getSymbol()))) {//Root Command
                         switch (Objects.requireNonNull(Keyword.getKeywordFromName(input))) {
                             case START_COMMAND:
                                 new ScriptingException(String
@@ -330,7 +371,7 @@ public class Script {
                         }
                     } else if (input.startsWith(Character.toString(TextSpecifications.ANNOTATION.getSymbol()))) {
                         StringBuilder str = new StringBuilder();
-                        String annotation = input.replaceAll("\\*\\[|].*", "");
+                        String annotation = input.replaceAll("\\*\\[|].*", ""); //text between the brackets
                         String str1;
                         if (Keyword.annotationExists('[' + annotation + ']') && input.length() != 1) {
                             str1 = input.substring(3 + annotation.length());
