@@ -121,33 +121,40 @@ import java.util.Scanner;
  *         <li>The script cannot compile or run the file</li>
  *     </ol>
  * </p>
+ * See <u><a href="https://github.com/mrodz/MSCRIPT#readme" target="_blank";>this link</a></u> for more in-depth information
+ * about the language.
  * <br/> <br/>
  * <h2>Sample document (The colors are cosmetic, and are only there to clarify what each element is doing):</h2>
  * <pre>
  *     <span style="color:#2c9ba3">```mscript</span>
  *
  *     <span style="color:#a2b0a6"># This is a comment!</span>
- *     <span style="color:#a2b0a6"># This is another comment :)</span>
+ *
+ *     <span style="color:#a2b0a6">##!<i>
+ *
+ *     This is another comment...
+ *     a multi-line block comment!
+ *     :)
+ *     </i>!##</span>
  *
  *     <span style="color:#f5f242">@start</span>
- *     <span style="color:#d99338">entry1
+ *     <span style="color:#ebe9e6">entry1
  *     entry2
  *     entry3 entry4 entry5
  *     </span>
- *
  *     <span style="color:#a2b0a6"># entry6</span>
  *
- *     <span style="color:#1a7320">*[^+]</span><span style="color:#ebe9e6"> Wow! This is great! This is all saved as entry6! </span>
+ *     <span style="color:#1a7320">*[^+]</span><span style="color:#ebe9e6"><i> Wow! This is great! This is all saved as entry6! </i></span>
  *     <span style="color:#1a7320">*[@]</span> <span style="color:#a2b0a6"># Saves an entry starting with '@'</span>
  *     <span style="color:#1a7320">*[_]</span> <span style="color:#a2b0a6"># Saves a blank entry</span>
  *
- *     <span style="color:#1a7320">*[{{]</span> <span style="color:#ebe9e6">This is all being
+ *     <span style="color:#1a7320">*[{{]</span> <span style="color:#ebe9e6"><i>This is all being
  *     stored
  *     as
  *     a grouped data entry!
- *     :) </span><span style="color:#1a7320">*[}}]</span>
+ *     :)</i> </span><span style="color:#1a7320">*[}}]</span>
  *
- *     <span style="color:#d99338">a b c</span>
+ *     <span style="color:#ebe9e6">a b c</span>
  *
  *     <span style="color:#f5f242">@stop</span> <span style="color:#a2b0a6"># Stops the scanning of the document.</span>
  *
